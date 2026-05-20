@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adiuvatai — Brand Wiki</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void: #0A0A0A;
+      --bone: #F5F0EB;
+      --gunmetal: #2D2D2D;
+      --blood: #8B0000;
+      --arterial: #CC1C1C;
+      --muted: #6B6B6B;
+      --border: #1E1E1E;
+      --card: #111111;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void);
+      color: var(--bone);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 48px;
+      background: rgba(10,10,10,0.95);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .topbar-brand {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      color: var(--bone);
+      text-decoration: none;
+      margin-right: 32px;
+    }
+
+    .topbar-brand span { color: var(--blood); }
+
+    .topbar-nav {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .topbar-nav::-webkit-scrollbar { display: none; }
+
+    .topbar-nav a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0 16px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      border-left: 1px solid var(--border);
+      transition: color 0.15s, background 0.15s;
+      white-space: nowrap;
+    }
+
+    .topbar-nav a:hover, .topbar-nav a.active {
+      color: var(--bone);
+      background: var(--card);
+    }
+
+    .topbar-nav a.active { color: var(--arterial); }
+
+    /* LAYOUT */
+    .layout {
+      display: flex;
+      margin-top: 48px;
+      min-height: calc(100vh - 48px);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 48px;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      padding: 24px 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gunmetal) transparent;
+    }
+
+    .sidebar-section {
+      margin-bottom: 24px;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 20px 8px;
+      display: block;
+    }
+
+    .sidebar-nav { list-style: none; }
+
+    .sidebar-nav li a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.12s, background 0.12s;
+      border-left: 2px solid transparent;
+    }
+
+    .sidebar-nav li a:hover {
+      color: var(--bone);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .sidebar-nav li a.active {
+      color: var(--arterial);
+      border-left-color: var(--arterial);
+      background: rgba(204,28,28,0.05);
+    }
+
+    .sidebar-nav li a .icon {
+      font-size: 14px;
+      width: 18px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      margin-left: 240px;
+      padding: 48px 64px 96px;
+      max-width: 900px;
+    }
+
+    /* ARTICLE */
+    .article { display: none; }
+    .article.active { display: block; }
+
+    .article-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-section-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blood);
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+    }
+
+    .article h1 {
+      font-family: var(--font-display);
+      font-size: 56px;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: var(--bone);
+      margin-bottom: 16px;
+    }
+
+    .article h1 .accent { color: var(--arterial); }
+
+    .article-lead {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    /* SECTIONS */
+    .section { margin-bottom: 48px; }
+
+    .section-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--blood);
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: 0.06em;
+      color: var(--bone);
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      margin-top: 28px;
+    }
+
+    p { margin-bottom: 14px; color: var(--bone); }
+
+    strong { color: var(--bone); font-weight: 600; }
+    em { color: var(--muted); font-style: italic; }
+
+    /* LISTS */
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+      color: var(--bone);
+    }
+
+    li::marker { color: var(--blood); }
+
+    /* TABLES */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+
+    th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--bone);
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    td .us { color: var(--arterial); font-weight: 600; }
+    td .them { color: var(--muted); }
+
+    /* CALLOUT */
+    .callout {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--blood);
+      padding: 16px 20px;
+      margin: 24px 0;
+      font-size: 14px;
+    }
+
+    .callout p { margin: 0; }
+    .callout strong { color: var(--arterial); }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid var(--blood);
+      color: var(--blood);
+      margin-right: 6px;
+      font-family: var(--font-mono);
+    }
+
+    .badge.red { background: rgba(139,0,0,0.15); }
+
+    /* OFFER CARD */
+    .offer-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .offer-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 24px;
+      position: relative;
+    }
+
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--blood);
+    }
+
+    .offer-card h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: var(--bone);
+      margin: 0 0 8px;
+    }
+
+    .offer-card .offer-price {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--arterial);
+      margin-bottom: 12px;
+    }
+
+    .offer-card p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* VOICE TABLE STYLES */
+    .voice-good { color: #4ade80; }
+    .voice-bad { color: var(--arterial); text-decoration: line-through; }
+
+    /* PILLOW */
+    .pillar-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .pillar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+
+    .pillar-card .num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      color: var(--blood);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .pillar-card h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: var(--bone);
+      margin: 0 0 8px;
+    }
+
+    .pillar-card p { font-size: 13px; color: var(--muted); margin: 0; }
+
+    /* FOOTER */
+    .wiki-footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 32px 24px; }
+      .article h1 { font-size: 40px; }
+    }
+
+    /* SCROLL TO TOP */
+    .scroll-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--bone);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+
+    .scroll-top:hover { border-color: var(--arterial); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="#" class="topbar-brand" data-page="index">ADIUVAT<span>A</span>I</a>
+  <div class="topbar-nav">
+    <a href="#" data-page="index">Overview</a>
+    <a href="#" data-page="brand-brief">Brand Brief</a>
+    <a href="#" data-page="icp">ICP</a>
+    <a href="#" data-page="voice">Voice</a>
+    <a href="#" data-page="positioning">Positioning</a>
+    <a href="#" data-page="offers">Offers</a>
+    <a href="#" data-page="competitive">Competitive</a>
+    <a href="#" data-page="content">Content</a>
+    <a href="#" data-page="frameworks">Frameworks</a>
+  </div>
+</nav>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Brand</span>
+      <ul class="sidebar-nav">
+        <li><a href="#" data-page="index" class="active"><span class="icon">⌘</span> Overview</a></li>
+        <li><a href="#" data-page="brand-brief"><span class="icon">◈</span> Brand Brief</a></li>
+        <li><a href="#" data-page="positioning"><span class="icon">◉</span> Positioning</a></li>
+        <li><a href="#" data-page="voice"><span class="icon">◎</span> Voice & Tone</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Market</span>
+      <ul class="sidebar-nav">
+        <li><a href="#" data-page="icp"><span class="icon">⊛</span> ICP</a></li>
+        <li><a href="#" data-page="competitive"><span class="icon">⬡</span> Competitive</a></li>
+        <li><a href="#" data-page="offers"><span class="icon">◆</span> Offers</a></li>
+        <li><a href="#" data-page="content"><span class="icon">▤</span> Content</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Methodology</span>
+      <ul class="sidebar-nav">
+        <li><a href="#" data-page="frameworks"><span class="icon">⫴</span> Frameworks</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Reference</span>
+      <ul class="sidebar-nav">
+        <li><a href="https://github.com/Awakenthemind/adiuvatai" target="_blank"><span class="icon">↑</span> GitHub</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ===================== INDEX ===================== -->
+    <article class="article active" id="page-index">
+      <div class="article-header">
+        <div class="article-section-tag">Brand Wiki — Adiuvatai</div>
+        <h1>ADIUVAT<span class="accent">AI</span></h1>
+        <p class="article-lead">Latin: "to assist, to serve at the side of." We're the weapon in your arsenal — embedded, relentless, and precise.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>The Brand Essence</h2>
+        <p>We don't consult from a distance. We embed. We fight alongside. We're the silent partner who handles the work nobody else wants to do — the structural redesign, the campaign that has to launch in 72 hours, the rebrand that a team has been dreading for six months.</p>
+
+        <div class="callout">
+          <p><strong>Tagline:</strong> The Work Behind The Work.</p>
+        </div>
+
+        <p><strong>Vibe:</strong> Sophisticated neo-noir brutalism. Clinical precision by day. Labyrinthine, neon-soaked, lethal elegance by night. The agency that looks like a custom suit and puts bullets through bad briefs.</p>
+      </div>
+
+      <div class="section">
+        <h2>Visual Identity</h2>
+        <table>
+          <tr><th>Role</th><th>Name</th><th>Hex</th><th>Usage</th></tr>
+          <tr><td>Foundation</td><td style="color:var(--bone)">Void Black</td><td style="font-family:var(--font-mono)">#0A0A0A</td><td>Primary background</td></tr>
+          <tr><td>Text</td><td style="color:var(--bone)">Bone</td><td style="font-family:var(--font-mono)">#F5F0EB</td><td>Primary text on dark</td></tr>
+          <tr><td>Structure</td><td style="color:#9a9a9a">Gunmetal</td><td style="font-family:var(--font-mono)">#2D2D2D</td><td>Borders, cards, containers</td></tr>
+          <tr><td>Accent</td><td style="color:var(--blood)">Blood Red</td><td style="font-family:var(--font-mono)">#8B0000</td><td>Critical elements only</td></tr>
+          <tr><td>Hover</td><td style="color:var(--arterial)">Arterial Red</td><td style="font-family:var(--font-mono)">#CC1C1C</td><td>Interactive states</td></tr>
+        </table>
+
+        <h3>Hard Rules</h3>
+        <ul>
+          <li>No gradients. No drop shadows. No decorative chrome.</li>
+          <li>Dark mode only — the darkness IS the identity</li>
+          <li>Cards emerge from black, not white</li>
+          <li>Red accents only on critical interactive elements</li>
+          <li>Hairline borders, no shadows</li>
+          <li>Motion: fast in/fast out, flicker transitions, sub-200ms</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Offer Architecture</h2>
+        <div class="offer-grid">
+          <div class="offer-card">
+            <h3>Brand Sprint</h3>
+            <div class="offer-price">$15K–$30K</div>
+            <p>2-week positioning and voice clarity engagement. For companies doing a rebrand, launching something new, or who have brand debt they need to clear fast.</p>
+          </div>
+          <div class="offer-card">
+            <h3>Campaign Execution</h3>
+            <div class="offer-price">$25K–$75K</div>
+            <p>We build and run the campaign. You approve. We ship. For companies with a clear brief and a deadline.</p>
+          </div>
+          <div class="offer-card">
+            <h3>Embedded Partner</h3>
+            <div class="offer-price">$10K–$20K/month</div>
+            <p>Dedicated team member embedded in your operations. You manage strategy, we manage execution. 3-month minimum.</p>
+          </div>
+          <div class="offer-card">
+            <h3>Brand Intelligence</h3>
+            <div class="offer-price">$20K–$50K to build</div>
+            <p>We build your brand wiki — the living artifact of everything your brand is, says, and does.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Colors as Texture</h2>
+        <p>Art direction draws from: <em>brushed titanium, wet asphalt, fine suiting wool, dark mahogany, cracked bulletproof glass</em>.</p>
+        <p>Typography: <strong>Display</strong> — Bebas Neue (geometric sans, bold, tracked, ALL CAPS). <strong>Body</strong> — Inter. <strong>Accent</strong> — JetBrains Mono for AI reasoning traces.</p>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki v2025.01</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== BRAND BRIEF ===================== -->
+    <article class="article" id="page-brand-brief">
+      <div class="article-header">
+        <div class="article-section-tag">Brand Brief</div>
+        <h1>BRAND <span class="accent">BRIEF</span></h1>
+        <p class="article-lead">What we sell. Who we sell to. What we believe.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>Business</h2>
+        <p><strong>What we sell:</strong> Creative consulting — brand strategy, design, campaigns, and execution for businesses that need serious work done without the agency theater. We're not a retainer factory. We're a weapon in your arsenal.</p>
+        <div class="callout">
+          <p><strong>Tagline:</strong> The Work Behind The Work.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Customer</h2>
+        <p><strong>The person who hires us:</strong> CEO, founder, or brand/creative director at a company that's past the startup phase but not yet a household name. They have real revenue ($1M–$50M), real problems, and they're tired of agencies that show up with a deck and disappear.</p>
+        <p>They're tactical. They want someone embedded, not a consultant who visits. They've been burned by agencies that overpromise, underdeliver, and charge like they did both. They want precision. They want speed. They want someone who understands the game.</p>
+        <p><strong>What they want:</strong> Someone who handles the work so they can focus on what only they can do.</p>
+        <p><strong>What they hate:</strong> Agencies that speak in jargon, waste time in discovery, and deliver specs instead of results. Bloat. Theater. The "we need to sync" culture.</p>
+      </div>
+
+      <div class="section">
+        <h2>Primary CTA</h2>
+        <p>When someone is ready to work: <strong>Get in touch.</strong> No formal "request a demo." Just a conversation.</p>
+      </div>
+
+      <div class="section">
+        <h2>Strong Opinion / Wedge</h2>
+        <div class="callout">
+          <p>Most agencies sell the illusion of creative excellence. We sell execution. The work is the strategy — not the slides, the mood boards, or the 12-point positioning framework that sits in a folder after the kickoff meeting. If the output doesn't move the needle, the strategy failed.</p>
+          <p style="margin-top:12px">We'd rather ship one lethal campaign than produce a beautiful deck that nobody remembers.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Voice Traits</h2>
+        <p>Authoritative. Precise. Unflinching. Clinical. Lethal elegance.</p>
+        <p><strong>5-word self-description:</strong> Sharp, embedded, relentless, surgical, clean.</p>
+        <p><strong>Words we use:</strong> precise, structural, embedded, relentless, surgical, lethal, unflinching, tactical, armor, weapon, bullet.</p>
+        <p><strong>Words we don't:</strong> synergy, leverage, best-in-class, cutting-edge, robust, holistic, innovative, forward-thinking.</p>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== ICP ===================== -->
+    <article class="article" id="page-icp">
+      <div class="article-header">
+        <div class="article-section-tag">Ideal Customer Profile</div>
+        <h1>ICP</h1>
+        <p class="article-lead">Who we work with. Who we don't. How to recognize the right fit.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>The Person</h2>
+        <p>CEO, founder, brand director, or creative director at a company with:</p>
+        <ul>
+          <li><strong>Revenue:</strong> $1M–$50M (past startup phase, not yet household name)</li>
+          <li><strong>Team:</strong> Has a team but needs outside firepower for specific problems</li>
+          <li><strong>Problem:</strong> Something is broken — positioning, brand, campaign, execution — and they need it solved, not discussed</li>
+        </ul>
+        <p>They don't have time to manage an agency. They need a partner who handles the work while they handle the rest.</p>
+      </div>
+
+      <div class="section">
+        <h2>Psychographic Profile</h2>
+        <p><strong>What they want:</strong></p>
+        <ul>
+          <li>Someone who gets in the arena with them, not above it</li>
+          <li>Work that moves the needle, not metrics that look good in a report</li>
+          <li>Clarity. Speed. Precision.</li>
+          <li>Someone who says what they see and does the work.</li>
+        </ul>
+        <p><strong>What they hate:</strong></p>
+        <ul>
+          <li>Agency theater — the jargon, the decks, the "let's circle back"</li>
+          <li>Retainer culture — paying for time instead of buying outcomes</li>
+          <li>Being sold to before being trusted</li>
+          <li>The 30-page strategy doc that gets bookmarked and forgotten</li>
+        </ul>
+        <p><strong>What they're tired of:</strong></p>
+        <ul>
+          <li>Agencies that show up with expertise and disappear after the pitch</li>
+          <li>Being managed instead of supported</li>
+          <li>The gap between what was promised and what was delivered</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Decision Triggers</h2>
+        <p>They reach out when:</p>
+        <ul>
+          <li>A launch is imminent and the current plan is falling apart</li>
+          <li>They've been burned by an agency and need someone who won't repeat the mistake</li>
+          <li>They have a clear problem and need it solved — not a discovery phase</li>
+          <li>The internal team is maxed out and they need firepower</li>
+          <li>They need someone embedded, not a vendor they manage</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>What They're NOT</h2>
+        <ul>
+          <li>Early-stage startups looking for "brand identity" from scratch</li>
+          <li>Companies that want the cheapest option</li>
+          <li>People looking for a vendor, not a partner</li>
+          <li>Anyone who needs their hand held through every decision</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>ICP Tiering</h2>
+        <div class="offer-grid">
+          <div class="offer-card">
+            <h3>Tier 1 — Primary</h3>
+            <p><strong>Profile:</strong> Founder or CEO, $3M–$20M revenue, has been through the agency wringer at least once. Clear problem, clear budget, clear timeline. They want a weapon, not a workshop.</p>
+            <p style="margin-top:10px"><strong>What they need:</strong> Execution. Speed. A partner who doesn't need managing.</p>
+          </div>
+          <div class="offer-card">
+            <h3>Tier 2 — Secondary</h3>
+            <p><strong>Profile:</strong> Brand or creative director, mid-sized team, running point on a specific initiative. Has budget authority but needs internal buy-in. They want someone who makes them look good.</p>
+            <p style="margin-top:10px"><strong>What they need:</strong> Precision work that they can defend to leadership. Clarity. No theater.</p>
+          </div>
+          <div class="offer-card">
+            <h3>Tier 3 — Opportunistic</h3>
+            <p><strong>Profile:</strong> Marketing director at a company doing a rebrand or launching a new product line. Budget and deadline, not enough internal resource.</p>
+            <p style="margin-top:10px"><strong>What they need:</strong> To feel confident that they're hiring the right team. Proof that we can handle their specific situation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>ICP Signal Phrases</h2>
+        <p>Watch for these in initial conversations:</p>
+        <ul>
+          <li>"We've done the agency thing before and it wasn't..."</li>
+          <li>"We need someone who can just handle it"</li>
+          <li>"The last team was great on paper but..."</li>
+          <li>"We don't have time to manage another agency"</li>
+          <li>"We need this done in [X] weeks, not [X] months"</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Markets We Serve Best</h2>
+        <ul>
+          <li>Professional services (law firms, consultancies, financial advisors)</li>
+          <li>Tech companies past Series A that need positioning clarity</li>
+          <li>Consumer brands with distribution but no brand coherence</li>
+          <li>B2B companies that need to speak human</li>
+        </ul>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== VOICE ===================== -->
+    <article class="article" id="page-voice">
+      <div class="article-header">
+        <div class="article-section-tag">Voice & Tone</div>
+        <h1>VOICE</h1>
+        <p class="article-lead">"Say less. Mean more."</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>The Voice</h2>
+        <p>We sound like someone who says less and means more. We don't pad. We don't hedge. We don't perform expertise — we demonstrate it.</p>
+        <p><strong>Core characteristics:</strong></p>
+        <ul>
+          <li><strong>Direct</strong> — Say less. Mean more.</li>
+          <li><strong>Precise</strong> — Every word has a job. None of them are wasted.</li>
+          <li><strong>Unflinching</strong> — We don't soften feedback to be liked.</li>
+          <li><strong>Cold</strong> — Not unfriendly. Just not warm for the sake of it.</li>
+          <li><strong>Surgical</strong> — Find the problem fast. Solve it cleaner.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Tone by Context</h2>
+        <table>
+          <tr><th>Context</th><th>Tone</th></tr>
+          <tr><td>Brand voice (public)</td><td>Authoritative, sharp, confident. Lead with the punch.</td></tr>
+          <tr><td>Client communication</td><td>Direct, precise, no-nonsense. Clear next steps.</td></tr>
+          <tr><td>Proposals</td><td>Clinical, structural, proof-heavy. Show, don't tell.</td></tr>
+          <tr><td>Internal (wiki/notes)</td><td>Terse. Notes, not prose. Use shorthand.</td></tr>
+          <tr><td>Social / content</td><td>Confident, provocative where it serves. No hedging.</td></tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>Syntax Rules</h2>
+        <ul>
+          <li><strong>Sentence length:</strong> Short to medium. No compound paragraphs.</li>
+          <li><strong>Punctuation:</strong> Commas for breath. Periods for impact.</li>
+          <li><strong>Numbers:</strong> Digits — <code style="font-family:var(--font-mono);background:var(--card);padding:1px 6px;border:1px solid var(--border)">3 weeks</code>, <code style="font-family:var(--font-mono);background:var(--card);padding:1px 6px;border:1px solid var(--border)">$50K</code>, <code style="font-family:var(--font-mono);background:var(--card);padding:1px 6px;border:1px solid var(--border)">30%</code></li>
+          <li><strong>ALL CAPS:</strong> Only for critical warnings, brand moments, display headlines. Not for emphasis.</li>
+          <li><strong>Contractions:</strong> Always. "Don't" not "do not."</li>
+          <li><strong>First person:</strong> "We" for Adiuvatai. "You" for the client. Never "one."</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Words We Use</h2>
+        <p style="font-family:var(--font-mono);font-size:13px;color:var(--bone)">precise, surgical, structural, embedded, relentless, lethal, clean, sharp, cold, direct, fast, done, execution</p>
+      </div>
+
+      <div class="section">
+        <h2>Words We Don't Use</h2>
+        <p style="font-family:var(--font-mono);font-size:13px;color:var(--arterial);text-decoration:line-through">leverage, synergy, best-in-class, cutting-edge, robust, holistic, innovative, forward-thinking, game-changer, disrupt, ecosystem, value-add, pivot, circle back, sync, deep dive, agile, scalable, solution, methodology</p>
+      </div>
+
+      <div class="section">
+        <h2>Leading With The Punch</h2>
+        <p><strong>Rule:</strong> Never bury the lead. The first line should be the point.</p>
+        <div style="margin-top:16px">
+          <p style="color:var(--muted);font-size:13px;text-decoration:line-through;margin-bottom:8px">"We believe that in today's competitive landscape, brand positioning is more important than ever, which is why we focus on..."</p>
+          <p style="color:#4ade80;font-size:13px;margin-bottom:0">"Your brand isn't a logo. It's the work you do when no one's watching. We make sure it counts."</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>What We Never Sound Like</h2>
+        <ul>
+          <li>A LinkedIn thought leader</li>
+          <li>An agency pitch deck</li>
+          <li>A consultant who needs to explain why they're worth it</li>
+          <li>Someone who's still figuring it out</li>
+        </ul>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== POSITIONING ===================== -->
+    <article class="article" id="page-positioning">
+      <div class="article-header">
+        <div class="article-section-tag">Positioning</div>
+        <h1>POSITION<span class="accent">ING</span></h1>
+        <p class="article-lead">Mission. Pillars. Differentiation.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>Mission</h2>
+        <p>We exist to handle the work that makes businesses move. Not the work that looks good in a portfolio — the work that actually changes the position, wins the market, and clears the board.</p>
+        <p><strong>We embed. We execute. We don't leave.</strong></p>
+      </div>
+
+      <div class="section">
+        <h2>Positioning Statement</h2>
+        <div class="callout">
+          <p><strong>For</strong> business leaders and creative directors at companies with real revenue and real problems</p>
+          <p><strong>Who are</strong> tired of agencies that deliver decks instead of results</p>
+          <p><strong>Adiuvatai is</strong> a creative consulting agency</p>
+          <p><strong>That</strong> embeds, executes, and doesn't leave until the work is done</p>
+          <p><strong>Unlike</strong> traditional agencies that sell time, produce theater, and disappear after the pitch</p>
+          <p><strong>We deliver</strong> precision — the structural work that moves needles, not just metrics.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Core Positioning Pillars</h2>
+        <div class="pillar-grid">
+          <div class="pillar-card">
+            <div class="num">01</div>
+            <h3>We Embed, We Don't Visit</h3>
+            <p>We're not a vendor you manage. We're a partner you rely on. We work in your context, not ours.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="num">02</div>
+            <h3>Execution Is The Strategy</h3>
+            <p>The work IS the strategy. Not the slides. Not the frameworks. The output. The campaign that ran. The brand that held.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="num">03</div>
+            <h3>No Theater</h3>
+            <p>No jargon. No "synergy." No 12-step process to tell you what you already know. Just the work, structured and clean.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="num">04</div>
+            <h3>Lethal Elegance</h3>
+            <p>We're precise. We're expensive. We're worth it. We look like a custom suit and perform like a weapon.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Values</h2>
+        <ul>
+          <li><strong>Precision:</strong> Every output is structural. No decoration without function.</li>
+          <li><strong>Relentlessness:</strong> We don't stop until it's right. We don't explain why it's taking time.</li>
+          <li><strong>Embedded:</strong> We work in your context, not ours. We learn your game.</li>
+          <li><strong>Unflinching:</strong> We say what we see. We don't soften feedback to be liked.</li>
+          <li><strong>Surgical:</strong> We find the problem fast. We solve it cleaner.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Competitive Differentiation</h2>
+        <table>
+          <tr><th></th><th><span class="them">Them</span></th><th><span class="us">Us</span></th></tr>
+          <tr><td>Mode</td><td class="them">Friendly</td><td class="us">Cold</td></tr>
+          <tr><td>Approach</td><td class="them">Bloated</td><td class="us">Precise</td></tr>
+          <tr><td>Transparency</td><td class="them">Opaque</td><td class="us">Transparent</td></tr>
+          <tr><td>Delivery</td><td class="them">Decks</td><td class="us">Done work</td></tr>
+          <tr><td>Relationship</td><td class="them">Managed</td><td class="us">Embedded</td></tr>
+          <tr><td>Promise</td><td class="them">Best-in-class</td><td class="us">Right-for-you</td></tr>
+          <tr><td>Speed</td><td class="them">Slow</td><td class="us">Fast</td></tr>
+          <tr><td>Process</td><td class="them">Theater</td><td class="us">Execution</td></tr>
+        </table>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== OFFERS ===================== -->
+    <article class="article" id="page-offers">
+      <div class="article-header">
+        <div class="article-section-tag">Offer Architecture</div>
+        <h1>OFFERS</h1>
+        <p class="article-lead">What we sell. How we sell it.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>Philosophy</h2>
+        <p>We don't sell retainers. We don't sell packages. We sell the work.</p>
+        <p>Our offer structure is built around what clients actually need: clarity on what's being done, why it's being done, and what it costs. Not padded hours, not discovery phases, not "engaging with stakeholders."</p>
+      </div>
+
+      <div class="section">
+        <h2>Core Offers</h2>
+        <div class="offer-grid">
+          <div class="offer-card">
+            <h3>1. Brand Sprint</h3>
+            <div class="offer-price">$15K–$30K / 2 weeks</div>
+            <p>A focused engagement that clarifies and documents your brand's core positioning, voice, and visual direction. The work that usually takes months, compressed and delivered.</p>
+            <p style="margin-top:10px;font-size:12px;color:var(--muted)"><strong>Deliverables:</strong> Positioning statement · Voice guide · Visual direction · Brand brief</p>
+          </div>
+          <div class="offer-card">
+            <h3>2. Campaign Execution</h3>
+            <div class="offer-price">$25K–$75K / 4–8 weeks</div>
+            <p>We build and run the campaign. You approve. We ship. No theater. You know what you want to say — we figure out how to say it better and make it move.</p>
+            <p style="margin-top:10px;font-size:12px;color:var(--muted)"><strong>Deliverables:</strong> Campaign concept · Full asset production · Launch execution · Real reporting</p>
+          </div>
+          <div class="offer-card">
+            <h3>3. Embedded Partner</h3>
+            <div class="offer-price">$10K–$20K/month · 3-month min</div>
+            <p>A dedicated team member embedded in your operations. You manage the strategy, we manage the execution. Teams that are stretched and need someone who functions as part of the machine.</p>
+            <p style="margin-top:10px;font-size:12px;color:var(--muted)"><strong>Deliverables:</strong> Dedicated lead · Production capacity · Weekly check-ins · Structured output</p>
+          </div>
+          <div class="offer-card">
+            <h3>4. Brand Intelligence</h3>
+            <div class="offer-price">$20K–$50K to build · monthly maintenance</div>
+            <p>We build your brand wiki — the living, compounding artifact of everything your brand is, says, and does. Source material goes in; the wiki gets maintained.</p>
+            <p style="margin-top:10px;font-size:12px;color:var(--muted)"><strong>Deliverables:</strong> Brand wiki · ICP · Voice guide · Positioning · Case studies · Content pillars</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Pricing Philosophy</h2>
+        <p>We price to be selective, not to maximize volume. Our clients are not looking for the cheapest option — they're looking for the right team.</p>
+        <p>Pricing is project-based. We agree on scope and cost before work starts. No surprises. No timesheet theater.</p>
+        <p><strong>Factors that affect pricing:</strong> Timeline (faster = more expensive) · Scope complexity · Deliverable count · Whether we have existing context on the client</p>
+      </div>
+
+      <div class="section">
+        <h2>What We Don't Do</h2>
+        <ul>
+          <li>Retainers for "available time" — we don't sell availability</li>
+          <li>Projects where the client hasn't defined the problem</li>
+          <li>Work that requires us to explain our process repeatedly</li>
+          <li>"Quick favors" — if it takes our time, it costs our rate</li>
+        </ul>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== COMPETITIVE ===================== -->
+    <article class="article" id="page-competitive">
+      <div class="article-header">
+        <div class="article-section-tag">Competitive Landscape</div>
+        <h1>COMPETIT<span class="accent">IVE</span></h1>
+        <p class="article-lead">Where we sit. Who we beat. Why.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>The Landscape</h2>
+        <p>We sit in a market that has two failing poles:</p>
+        <div class="offer-grid" style="grid-template-columns:1fr 1fr">
+          <div class="offer-card">
+            <h3>Pole 1 — The Traditional Agency</h3>
+            <p>Sells time, not outcomes. Builds decks, not campaigns. Disappears after the pitch. Charges for process, not proof.</p>
+          </div>
+          <div class="offer-card">
+            <h3>Pole 2 — The Freelance Economy</h3>
+            <p>Inconsistent quality. No structural backup. Limited capacity. No accountability ecosystem.</p>
+          </div>
+        </div>
+        <p style="margin-top:16px"><strong>We're neither.</strong> We sell execution. We embed. We deliver.</p>
+      </div>
+
+      <div class="section">
+        <h2>Competitive Set</h2>
+
+        <h3>Traditional Agencies</h3>
+        <p><span class="voice-good">What they do:</span> Credentials, case studies, resources, scale</p>
+        <p><span class="voice-bad">What they screw up:</span> Speed, context, honesty, execution</p>
+        <p><strong>Our angle:</strong> No overhead. No process theater. We have the work.</p>
+
+        <h3>Boutiques and Small Studios</h3>
+        <p><span class="voice-good">What they do:</span> Attention, craft, quality, personal relationship</p>
+        <p><span class="voice-bad">What they screw up:</span> Capacity, structure, consistency</p>
+        <p><strong>Our angle:</strong> Structure. Backup. Capacity without sacrificing quality.</p>
+
+        <h3>In-House Teams</h3>
+        <p><span class="voice-good">What they do:</span> Deep context, speed on day-to-day, institutional memory</p>
+        <p><span class="voice-bad">What they screw up:</span> Fresh perspective, capacity on big initiatives, strategy</p>
+        <p><strong>Our angle:</strong> Outside view and execution firepower without agency theater.</p>
+
+        <h3>Consulting Firms (McKinsey/BCG)</h3>
+        <p><span class="voice-good">What they do:</span> Frameworks, strategic rigor, C-level credibility</p>
+        <p><span class="voice-bad">What they screw up:</span> Execution, speed, context</p>
+        <p><strong>Our angle:</strong> We deliver what consultancies analyze. The work, not the slide.</p>
+      </div>
+
+      <div class="section">
+        <h2>Our Differentiation</h2>
+        <table>
+          <tr><th>Competitor Type</th><th>Their Weakness</th><th>Our Response</th></tr>
+          <tr><td>Traditional agency</td><td class="them">Sells time, disappears</td><td class="us">We embed, we deliver</td></tr>
+          <tr><td>Boutique</td><td class="them">Capacity, structure</td><td class="us">We scale, we don't drop balls</td></tr>
+          <tr><td>In-house</td><td class="them">Fresh view, big initiative capacity</td><td class="us">We step in, we execute, we leave</td></tr>
+          <tr><td>Consultancy</td><td class="them">No execution, no speed</td><td class="us">The work, not the deck</td></tr>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>Competitive Phrases We Hear</h2>
+        <div class="callout">
+          <p><strong>"We worked with an agency before and it was..."</strong> — We know. That's why we lead with the work, not the process.</p>
+        </div>
+        <div class="callout">
+          <p><strong>"Can you just handle it?"</strong> — Yes. That's the job.</p>
+        </div>
+        <div class="callout">
+          <p><strong>"We need something fast but we also need it to be good"</strong> — Precision doesn't mean slow.</p>
+        </div>
+        <div class="callout">
+          <p><strong>"We've tried the freelancer thing"</strong> — We have backup. Structure. Standards. You don't have to manage us.</p>
+        </div>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== CONTENT ===================== -->
+    <article class="article" id="page-content">
+      <div class="article-header">
+        <div class="article-section-tag">Content Strategy</div>
+        <h1>CONTENT</h1>
+        <p class="article-lead">What we publish. Why. How.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <h2>Why We Create Content</h2>
+        <p>We're not building a content empire. We're building proof. Every piece we publish should demonstrate one of two things:</p>
+        <ul>
+          <li><strong>We know the game</strong> — strategic insight, industry observation, the truth others won't say</li>
+          <li><strong>We can do the work</strong> — case studies, process breakdowns, the output itself</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Content Pillars</h2>
+        <div class="pillar-grid">
+          <div class="pillar-card">
+            <div class="num">01</div>
+            <h3>Brand Truth</h3>
+            <p>Observations and convictions about brand, positioning, and the work — stated clearly, without hedging. Show we see the game clearly.</p>
+            <p style="margin-top:8px;font-size:12px;color:var(--muted)">Short-form articles, LinkedIn posts. Themes: "Why most brand guidelines are useless", "Your brand isn't your logo", "Why 'synergy' is a red flag".</p>
+          </div>
+          <div class="pillar-card">
+            <div class="num">02</div>
+            <h3>Process Proof</h3>
+            <p>How we do what we do — the actual methodology, not the pitch version. Show the machinery. We have systems, not just taste.</p>
+            <p style="margin-top:8px;font-size:12px;color:var(--muted)">Framework docs, process breakdowns. Themes: "How we run a brand sprint", "The intake conversation", "How we structure a campaign".</p>
+          </div>
+          <div class="pillar-card">
+            <div class="num">03</div>
+            <h3>Client Wins</h3>
+            <p>Proof — anonymized or with permission, specific, real numbers. Build credibility without self-promotion. Let the work speak.</p>
+            <p style="margin-top:8px;font-size:12px;color:var(--muted)">Case study summaries, pull quotes, before/afters. Themes: "How we helped [company] solve [problem]", "The brief vs. what we delivered".</p>
+          </div>
+          <div class="pillar-card">
+            <div class="num">04</div>
+            <h3>Industry Call-Outs</h3>
+            <p>What we see wrong in the market, said plainly. Demonstrate the unflinching voice. Not here to be liked — here to be right.</p>
+            <p style="margin-top:8px;font-size:12px;color:var(--muted)">Short posts, opinion pieces. Themes: "Why most agencies fail at execution", "The retainer model is broken", "Stop hiring agencies to manage".</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Content Rules</h2>
+        <ul>
+          <li><strong>No fluff.</strong> Every piece has a point. Make it.</li>
+          <li><strong>Proof over promise.</strong> Show, don't tell.</li>
+          <li><strong>Plain speech.</strong> No jargon.</li>
+          <li><strong>One idea per piece.</strong> Not three loosely related observations.</li>
+          <li><strong>Lead with the punch.</strong> First line is the point.</li>
+          <li><strong>Be useful.</strong> If someone reads this, they should get something concrete.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Format Guidelines</h2>
+        <table>
+          <tr><th>Format</th><th>Length</th><th>Structure</th></tr>
+          <tr><td>LinkedIn / Short-Form</td><td>100–300 words</td><td>One observation · Ends with a statement, not a question</td></tr>
+          <tr><td>Long-Form Articles</td><td>500–1500 words</td><td>Lead → Expand → Prove → Close</td></tr>
+          <tr><td>Case Studies</td><td>Varies</td><td>Situation → Approach → Result + pull quote + real numbers</td></tr>
+        </table>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+    <!-- ===================== FRAMEWORKS ===================== -->
+    <article class="article" id="page-frameworks">
+      <div class="article-header">
+        <div class="article-section-tag">Methodology</div>
+        <h1>FRAME<span class="accent">WORKS</span></h1>
+        <p class="article-lead">Proprietary systems built from doing the work.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-divider"></div>
+        <p>This section holds the methodology docs — the structured approaches we use to solve problems. Not theories. Not frameworks we found in a book. Systems we've built from doing the work.</p>
+      </div>
+
+      <div class="section">
+        <h2>Emerging Frameworks</h2>
+        <p>Frameworks to be documented as they emerge from actual client work:</p>
+        <ul>
+          <li>Brand clarity methodology (from Brand Sprint)</li>
+          <li>Campaign execution process</li>
+          <li>Embedded partner workflow</li>
+          <li>Brand wiki ingestion process</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Framework Template</h2>
+        <p>When documenting a new framework, use this structure:</p>
+        <div class="callout">
+          <p><strong>What it's for:</strong> The problem this solves. The context it's used in.</p>
+          <p style="margin-top:8px"><strong>How it works:</strong> Step-by-step. Not theoretical steps — the actual steps we take.</p>
+          <p style="margin-top:8px"><strong>When to use it:</strong> The specific situations where this framework applies.</p>
+          <p style="margin-top:8px"><strong>What it outputs:</strong> The deliverable or decision that comes out the other side.</p>
+          <p style="margin-top:8px"><strong>Key decisions:</strong> The places where judgment matters, not just process.</p>
+          <p style="margin-top:8px"><strong>Notes:</strong> Edge cases, common mistakes, what to watch for.</p>
+        </div>
+      </div>
+
+      <div class="wiki-footer">
+        <span>adiuvatai.com / Brand Wiki</span>
+        <span>Private — For internal use</span>
+      </div>
+    </article>
+
+  </main>
+</div>
+
+<script>
+  // Navigation
+  const pages = document.querySelectorAll('.article');
+  const navLinks = document.querySelectorAll('[data-page]');
+
+  function showPage(id) {
+    pages.forEach(p => p.classList.remove('active'));
+    navLinks.forEach(n => n.classList.remove('active'));
+
+    const target = document.getElementById('page-' + id);
+    if (target) target.classList.add('active');
+    navLinks.forEach(n => {
+      if (n.dataset.page === id) n.classList.add('active');
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.pushState(null, '', '#' + id);
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showPage(link.dataset.page);
+    });
+  });
+
+  // Restore from hash
+  if (location.hash) {
+    const id = location.hash.slice(1);
+    showPage(id);
+  }
+</script>
+
+</body>
+</html>
