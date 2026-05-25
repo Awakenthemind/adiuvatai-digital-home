@@ -1,0 +1,44 @@
+name: Run Database Migrations
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Supabase migrations
+        env:
+          SUPABASE_PROJECT_REF: ${{ vars.SUPABASE_PROJECT_REF }}
+          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          PGUSER: postgres
+          PGHOST: db.${{ vars.SUPABASE_PROJECT_REF }}.supabase.co
+          PGDATABASE: postgres
+          PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+        run: |
+          # Install psql
+          sudo apt-get update && sudo apt-get install -y postgresql-client -qq
+
+          # Combine all migration files in order
+          cd supabase/migrations
+          cat *.sql > /tmp/all_migrations.sql
+
+          # Run migrations via connection string
+          export PGPASSWORD="$SUPABASE_DB_PASSWORD"
+          psql \
+            --host=db.$SUPABASE_PROJECT_REF.supabase.co \
+            --port=5432 \
+            --user=postgres \
+            --dbname=postgres \
+            --set=ON_ERROR_STOP=1 \
+            --file=/tmp/all_migrations.sql
+
+          echo "✅ Migrations complete"
