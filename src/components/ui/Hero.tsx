@@ -1,7 +1,5 @@
 'use client';
 
-import { useRef } from 'react';
-import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import NeuralCanvas from './NeuralCanvas';
@@ -9,8 +7,6 @@ import NoiseTexture from './NoiseTexture';
 import styles from './Hero.module.css';
 
 const Hero = () => {
-  const underlineRef = useRef<HTMLSpanElement>(null);
-
   return (
     <section className={styles.hero}>
       {/* Layer 1 — Dark base with radial glow */}
@@ -32,51 +28,50 @@ const Hero = () => {
           className={styles.badge}
         >
           <Sparkles size={12} />
-          <span>AI Consulting — augmented. not artificial.</span>
+          <span>Adiuvatai</span>
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
-          className={styles.headline}
-        >
-          AI that keeps
-          <br />
-          you in the room.
-          <span ref={underlineRef} className={styles.underline} />
-        </motion.h1>
+        {/* 01 / Field Thesis */}
+        <div className={styles.thesisBlock}>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+            className={styles.thesisLabel}
+          >
+            01 / Field Thesis
+          </motion.h2>
+          <span className={styles.underline} />
+        </div>
 
-        {/* Subtext */}
+        {/* Main thesis */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-          className={styles.subtext}
+          className={styles.sub}
         >
-          <span className={styles.highlight}>Adiuvatai</span> helps businesses move from
-          AI confusion to{' '}
-          <span className={styles.highlight}>working AI systems</span>.
-          We bring clarity, strategy, and implementation discipline.
+          Most brands don't struggle to be{' '}
+          <span className={styles.strike}>seen.</span>
+          <br />
+          They struggle to be{' '}
+          <span className={styles.highlight}>understood.</span>
         </motion.p>
 
-        {/* Core Insight */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+        {/* Body */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45, ease: 'easeOut' }}
-          className={styles.insightBlock}
+          className={styles.body}
         >
-          <p className={styles.insight}>
-            Most organizations do not have an AI problem.
-            <br />
-            They have a{' '}
-            <span className={styles.insightHighlight}>clarity problem.</span>
-          </p>
-        </motion.div>
+          Positioning, systems, and creative intelligence
+          for brands that want to{' '}
+          <span className={styles.highlight}>mean something,</span>
+          {' '}not just make noise.
+        </motion.p>
 
-        {/* CTA form */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,9 +79,10 @@ const Hero = () => {
           className={styles.ctaForm}
         >
           <a href="mailto:hello@adiuvatai.com" className={styles.ctaButton}>
-            Start the conversation
+            Begin the work
             <ArrowRight size={16} className={styles.arrow} />
           </a>
+          <p className={styles.scrollHint}>Scroll to explore</p>
         </motion.div>
       </div>
     </section>
