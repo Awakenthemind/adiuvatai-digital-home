@@ -1,0 +1,199 @@
+/* VibeLab Hero — 4-layer z-index architecture */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #0a0a08;
+}
+
+/* Layer 1 — Dark radial glow background */
+.layerBg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201, 168, 76, 0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 80% at 70% 20%, rgba(201, 168, 76, 0.04) 0%, transparent 55%),
+    #0a0a08;
+}
+
+/* Layer 4 — Content */
+.content {
+  position: relative;
+  z-index: 10;
+  text-align: left;
+  padding: 0 2rem;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+}
+
+/* Eyebrow / badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #c9a84c;
+  font-family: ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+/* Headline */
+.headline {
+  position: relative;
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 600;
+  letter-spacing: -0.075em;
+  line-height: 0.94;
+  color: #e8e4d8;
+  margin-bottom: 2rem;
+  text-shadow:
+    0 0 60px rgba(201, 168, 76, 0.12),
+    0 0 120px rgba(201, 168, 76, 0.06);
+}
+
+/* Gradient underline via pseudo-element */
+.underline {
+  display: block;
+  height: 3px;
+  margin-top: 0.5rem;
+  background: linear-gradient(90deg, #c9a84c 0%, rgba(201, 168, 76, 0.3) 100%);
+  border-radius: 2px;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: underline-in 0.8s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes underline-in {
+  to { transform: scaleX(1); }
+}
+
+/* Subtext */
+.subtext {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: #9a9a82;
+  max-width: 2xl;
+  line-height: 1.65;
+  margin-bottom: 2.5rem;
+}
+
+.highlight {
+  color: #c9a84c;
+  font-weight: 500;
+}
+
+/* Core insight block */
+.insightBlock {
+  border-left: 2px solid #c9a84c;
+  padding-left: 2rem;
+  margin-bottom: 3rem;
+  max-width: 42rem;
+}
+
+.insight {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: #e8e4d8;
+  line-height: 1.65;
+  font-style: italic;
+}
+
+.insightHighlight {
+  color: #c9a84c;
+}
+
+/* CTA form / button */
+.ctaForm {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  background: #c9a84c;
+  color: #0a0a08;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+  animation: pulse-glow 2.5s 1.2s ease-in-out infinite;
+}
+
+.ctaButton:hover {
+  background: #d4b561;
+  transform: translateY(-1px);
+}
+
+.ctaButton:hover .arrow {
+  transform: translateX(3px);
+}
+
+.arrow {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+  50% { box-shadow: 0 0 28px 6px rgba(201, 168, 76, 0.25); }
+}
+
+/* Mobile: disable expensive motion */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .content {
+    padding-top: 7rem;
+  }
+
+  .headline {
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    /* Drop glow on mobile — too heavy */
+    text-shadow: none;
+  }
+
+  /* No entrance animations on mobile */
+  .badge,
+  .headline,
+  .subtext,
+  .insightBlock,
+  .ctaForm {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .ctaButton {
+    animation: none !important;
+  }
+
+  .underline {
+    animation: underline-in 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
