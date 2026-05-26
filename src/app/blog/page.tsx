@@ -2,14 +2,12 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/server';
-import StarterNotice from '@/components/layout/StarterNotice';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Journal — Digital Home Starter',
-  description:
-    'A polished blog structure for articles, essays, and guides you can adapt to your own brand and publishing system.',
+  title: 'Journal — Adiuvatai',
+  description: 'Articles on AI strategy, clarity, and practical implementation from Adiuvatai.',
 };
 
 function formatDate(dateStr: string) {
@@ -121,20 +119,17 @@ export default async function BlogPage() {
           </div>
 
           <div className="max-w-4xl">
-            <p className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-[0.78rem] font-medium text-white/60 mb-6">
+            <p className="inline-flex rounded-full border border-[#c9a84c]/20 bg-[#c9a84c]/8 px-4 py-1.5 text-[0.78rem] font-medium text-[#c9a84c] mb-6">
               Journal
             </p>
-            <h1 className="text-5xl md:text-7xl xl:text-[6.6rem] font-semibold tracking-[-0.075em] text-white leading-[0.95] mb-6">
-              A publishing layer
+            <h1 className="text-5xl md:text-7xl xl:text-[6.6rem] font-semibold tracking-[-0.075em] text-[#e8e4d8] leading-[0.95] mb-6">
+              Ideas on AI,
               <br />
-              ready for your voice.
+              clarity, and results.
             </h1>
             <p className="text-lg md:text-2xl text-neutral-300 max-w-3xl leading-relaxed">
-              This starter ships with a clean editorial archive for articles, essays, and guides. Keep the
-              structure, then tailor the visuals, categories, and voice to match your brand.
+              Practical thinking on moving from AI confusion to AI results. No hype. No dashboards. Just working systems.
             </p>
-
-            <StarterNotice compact />
           </div>
         </div>
       </section>
