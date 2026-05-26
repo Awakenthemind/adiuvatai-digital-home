@@ -14,9 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Digital Home Starter',
+  title: 'Adiuvatai — Augmented. Not Artificial.',
   description:
-    'A polished open-source starter for an owned website, blog, and AI-ready content system.',
+    'Adiuvatai helps businesses move from AI confusion to AI results. Working systems. Clear strategy. Durable adoption.',
+  keywords: ['AI consulting', 'AI strategy', 'business AI implementation', 'personal brand builder'],
+  openGraph: {
+    title: 'Adiuvatai — Augmented. Not Artificial.',
+    description: 'AI that keeps you in the room. Clarity, strategy, and implementation discipline.',
+    type: 'website',
+    url: 'https://adiuvatai.com',
+  },
 };
 
 export default function RootLayout({
