@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services' },
   { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function NavBar() {
@@ -25,16 +26,16 @@ export default function NavBar() {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 px-6 transition-all duration-300 ${
-        scrolled ? 'bg-black/85 backdrop-blur-md border-b border-white/10' : ''
+        scrolled ? 'bg-[#0a0a08]/85 border-b border-[#ffffff10]' : ''
       }`}
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[72px]">
         <Link href="/" className="flex items-center gap-3 text-white">
-          <span className="px-3 py-1 rounded-full border border-white/15 bg-white/5 text-[0.62rem] font-medium tracking-[0.02em] text-white/65">
-            Starter Template
+          <span className="px-3 py-1 rounded-full border border-[#c9a84c]/30 bg-[#c9a84c]/8 text-[0.62rem] font-medium tracking-[0.02em] text-[#c9a84c]">
+            AI Consulting
           </span>
-          <span className="font-semibold text-lg tracking-tight">
-            Digital Home
+          <span className="font-semibold text-lg tracking-tight text-[#e8e4d8]">
+            Adiuvatai
           </span>
         </Link>
 
@@ -45,8 +46,8 @@ export default function NavBar() {
               href={link.href}
               className={`text-[0.95rem] font-medium transition-colors ${
                 (link.href === '/' ? pathname === '/' : pathname.startsWith(link.href))
-                  ? 'text-white'
-                  : 'text-white/55 hover:text-white'
+                  ? 'text-[#e8e4d8]'
+                  : 'text-[#ffffff55] hover:text-[#e8e4d8]'
               }`}
             >
               {link.label}
@@ -54,9 +55,9 @@ export default function NavBar() {
           ))}
           <Link
             href="/contact"
-            className="rounded-full text-[0.95rem] font-medium bg-white text-black px-6 py-2.5 hover:bg-transparent hover:text-white border border-white transition-all"
+            className="rounded-full text-[0.95rem] font-medium border border-[#c9a84c] text-[#c9a84c] px-6 py-2.5 hover:bg-[#c9a84c]/10 transition-all"
           >
-            Start Here
+            Work with us
           </Link>
         </div>
       </div>
