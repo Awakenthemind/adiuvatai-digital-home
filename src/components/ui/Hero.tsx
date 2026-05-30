@@ -9,16 +9,16 @@ import styles from './Hero.module.css';
 const Hero = () => {
   return (
     <section className={styles.hero}>
-      {/* Layer 1 — Dark base with radial glow */}
+      {/* Layer 1 - Dark base with radial glow */}
       <div className={styles.layerBg} />
 
-      {/* Layer 2 — Neural canvas particles */}
+      {/* Layer 2 - Neural canvas particles */}
       <NeuralCanvas />
 
-      {/* Layer 3 — Noise texture */}
+      {/* Layer 3 - Noise texture */}
       <NoiseTexture />
 
-      {/* Layer 4 — Hero content */}
+      {/* Layer 4 - Hero content */}
       <div className={styles.content}>
         {/* Eyebrow badge */}
         <motion.div
@@ -28,10 +28,10 @@ const Hero = () => {
           className={styles.badge}
         >
           <Sparkles size={12} />
-          <span>Adiuvatai</span>
+          <span>AeyeGentic</span>
         </motion.div>
 
-        {/* 01 / Field Thesis */}
+        {/* Field label */}
         <div className={styles.thesisBlock}>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -39,7 +39,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
             className={styles.thesisLabel}
           >
-            01 / Field Thesis
+            AI Operations &amp; Brand Systems
           </motion.h2>
           <span className={styles.underline} />
         </div>
@@ -51,11 +51,10 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
           className={styles.sub}
         >
-          Most brands don't struggle to be{' '}
-          <span className={styles.strike}>seen.</span>
+          Systems built so you can work{' '}
+          <span className={styles.highlight}>on your business,</span>
           <br />
-          They struggle to be{' '}
-          <span className={styles.highlight}>understood.</span>
+          not in it.
         </motion.p>
 
         {/* Body */}
@@ -65,10 +64,7 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.45, ease: 'easeOut' }}
           className={styles.body}
         >
-          Positioning, systems, and creative intelligence
-          for brands that want to{' '}
-          <span className={styles.highlight}>mean something,</span>
-          {' '}not just make noise.
+          We build the AI automations and client-attracting brand systems that handle the heavy lifting, giving you back your time to focus on growth.
         </motion.p>
 
         {/* CTA */}
@@ -78,11 +74,13 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
           className={styles.ctaForm}
         >
-          <a href="mailto:hello@adiuvatai.com" className={styles.ctaButton}>
-            Begin the work
+          <a href="mailto:hello@aeyegentic.com" className={styles.ctaButton}>
+            Fix My Operations
             <ArrowRight size={16} className={styles.arrow} />
           </a>
-          <p className={styles.scrollHint}>Scroll to explore</p>
+          <a href="mailto:hello@aeyegentic.com" className={styles.emailLink}>
+            hello@aeyegentic.com
+          </a>
         </motion.div>
       </div>
     </section>
