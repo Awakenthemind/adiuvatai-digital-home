@@ -14,12 +14,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'AeyeGentic - AI Operations & Brand Systems',
+  title: 'AeyeGentics - AI Operations & Brand Systems',
   description:
     'Systems built so you can work on your business, not in it. AI automations and brand systems for small business owners and coaches.',
   keywords: ['AI operations', 'AI automation', 'brand systems', 'business automation', 'coaches', 'small business owners'],
   openGraph: {
-    title: 'AeyeGentic - AI Operations & Brand Systems',
+    title: 'AeyeGentics - AI Operations & Brand Systems',
     description: 'AI automations and client-attracting brand systems that handle the heavy lifting.',
     type: 'website',
     url: 'https://aeyegentic.vercel.app',
