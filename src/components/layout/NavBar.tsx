@@ -32,10 +32,10 @@ export default function NavBar() {
       <div className="max-w-[1400px] mx-auto flex items-center justify-between h-[72px]">
         <Link href="/" className="flex items-center gap-3 text-white">
           <span className="px-3 py-1 rounded-full border border-[#c9a84c]/30 bg-[#c9a84c]/8 text-[0.62rem] font-medium tracking-[0.02em] text-[#c9a84c]">
-            AI Consulting
+            AI Operations
           </span>
           <span className="font-semibold text-lg tracking-tight text-[#e8e4d8]">
-            Adiuvatai
+            AeyeGentic
           </span>
         </Link>
 
@@ -57,7 +57,7 @@ export default function NavBar() {
             href="/contact"
             className="rounded-full text-[0.95rem] font-medium border border-[#c9a84c] text-[#c9a84c] px-6 py-2.5 hover:bg-[#c9a84c]/10 transition-all"
           >
-            Work with us
+            Fix my operations
           </Link>
         </div>
       </div>
