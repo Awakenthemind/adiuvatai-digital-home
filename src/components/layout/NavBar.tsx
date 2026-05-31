@@ -35,7 +35,7 @@ export default function NavBar() {
             AI Operations
           </span>
           <span className="font-semibold text-lg tracking-tight text-[#e8e4d8]">
-            AeyeGentics
+            AeyeGentic
           </span>
         </Link>
 
