@@ -14,15 +14,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Adiuvatai — Augmented. Not Artificial.',
+  title: 'AeyeGentic - AI Operations & Brand Systems',
   description:
-    'Adiuvatai helps businesses move from AI confusion to AI results. Working systems. Clear strategy. Durable adoption.',
-  keywords: ['AI consulting', 'AI strategy', 'business AI implementation', 'personal brand builder'],
+    'Systems built so you can work on your business, not in it. AI automations and brand systems for small business owners and coaches.',
+  keywords: ['AI operations', 'AI automation', 'brand systems', 'business automation', 'coaches', 'small business owners'],
   openGraph: {
-    title: 'Adiuvatai — Augmented. Not Artificial.',
-    description: 'AI that keeps you in the room. Clarity, strategy, and implementation discipline.',
+    title: 'AeyeGentic - AI Operations & Brand Systems',
+    description: 'AI automations and client-attracting brand systems that handle the heavy lifting.',
     type: 'website',
-    url: 'https://adiuvatai.com',
+    url: 'https://aeyegentic.vercel.app',
   },
 };
 
