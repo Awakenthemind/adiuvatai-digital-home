@@ -1,4 +1,4 @@
-/* VibeLab Hero — 4-layer z-index architecture */
+/* VibeLab Hero - 4-layer z-index architecture */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -9,7 +9,7 @@
   background: #0a0a08;
 }
 
-/* Layer 1 — Dark radial glow background */
+/* Layer 1 - Dark radial glow background */
 .layerBg {
   position: absolute;
   inset: 0;
@@ -20,7 +20,7 @@
     #0a0a08;
 }
 
-/* Layer 4 — Content */
+/* Layer 4 - Content */
 .content {
   position: relative;
   z-index: 10;
@@ -52,7 +52,7 @@
   margin-bottom: 2rem;
 }
 
-/* 01 / Field Thesis label */
+/* Field label */
 .thesisBlock {
   margin-bottom: 2rem;
 }
@@ -67,11 +67,11 @@
   margin-bottom: 0.5rem;
 }
 
-/* Headline — removed, replaced by thesisLabel */
+/* Headline - removed, replaced by thesisLabel */
 /* kept for reference only */
 /*
 .headline {
-  [DEPRECATED — moved to .thesisLabel]
+  [DEPRECATED - moved to .thesisLabel]
 }
 */
 
@@ -102,7 +102,7 @@
   color: #9a9a82;
   line-height: 1.65;
   margin-bottom: 3rem;
-  max-width: 36rem;
+  max-width: 42rem;
 }
 
 /* Gradient underline via pseudo-element */
@@ -148,12 +148,22 @@
   align-items: flex-start;
 }
 
-.scrollHint {
+.scrollHint,
+.emailLink {
   font-family: ui-monospace, monospace;
   font-size: 0.62rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ffffff30;
+  color: #ffffff40;
+}
+
+.emailLink {
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.emailLink:hover {
+  color: #c9a84c;
 }
 
 .ctaButton {
@@ -206,7 +216,7 @@
 
   .headline {
     font-size: clamp(2.5rem, 10vw, 3.5rem);
-    /* Drop glow on mobile — too heavy */
+    /* Drop glow on mobile - too heavy */
     text-shadow: none;
   }
 
