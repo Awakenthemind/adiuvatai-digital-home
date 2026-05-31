@@ -28,7 +28,7 @@ const Hero = () => {
           className={styles.badge}
         >
           <Sparkles size={12} />
-          <span>AeyeGentic</span>
+          <span>AeyeGentics</span>
         </motion.div>
 
         {/* Field label */}
